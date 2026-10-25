@@ -1,90 +1,194 @@
-# Detecção de Fraude em Cartão de Crédito com Machine Learning
+# Detecção de fraude: do modelo à decisão
 
-Projeto desenvolvido durante o **Bootcamp Santander 2026 - Fundamentos de Dados (DIO)**, ministrado pela Expert Isadora Garcia Ferrão.  
-**Autor:** João Victor Santos  
+Estudo educacional de **João Victor Pereira Santos**, iniciado no Bootcamp Santander 2026 / DIO e evoluído para um experimento reproduzível de classificação de fraude. Usa o benchmark público de transações de cartão; não utiliza dados, modelos ou políticas da Serasa Experian.
 
-Aqui compartilho como estruturei o projeto, os testes que realizei e o que aprendi lidando com dados reais e extremamente desbalanceados.
+[Dashboard público](https://joaovictor-fraud-analytics.streamlit.app/) · [Estudo de caso no portfólio](https://joaovictor-portfolio-five.vercel.app/estudo-fraude.html) · [Relatório original](outputs/metrics_report.json) · [Consultas SQL](sql/queries_analiticas.sql)
 
----
+## Problema de negócio
 
-## 1. O Problema e por que a Acurácia engana
+Como identificar fraudes sem gerar um volume impraticável de alertas? Acurácia isolada não responde a essa pergunta em uma base desbalanceada. O estudo compara classificadores e escolhe uma política considerando captura, falsos positivos e **custos explicitamente hipotéticos**.
 
-O dataset contém **284.807 transações** de cartões europeus, mas apenas **492 são fraudes** (cerca de **0,17%**). Todo o resto (99,83%) são compras normais de clientes.
+## Dados e execução
 
-No início do estudo de Machine Learning, é comum olharmos direto para a **acurácia**, mas aqui ela é uma pegadinha:
-> Se criarmos um modelo que simplesmente responda que *"nenhuma transação é fraude"*, ele vai acertar **99,83%** das vezes. Parece um resultado incrível, mas na prática esse modelo é inútil porque deixou passar **100% dos golpes**!
+- Fonte: [OpenML 1597 — creditcard](https://www.openml.org/search?type=data&id=1597), espelho do benchmark ULB/Worldline.
+- Base original: 284.807 transações e 492 fraudes.
+- Após remover 1.081 duplicatas exatas: 283.726 transações e 473 fraudes.
+- Execução de referência: **24/10/2026 22:17**, horário de Brasília; semente **42**.
+- O ARFF é verificado contra o checksum publicado; a coluna `Time` original é preservada, mesmo sendo marcada como identificador de linha no OpenML.
+- Hash SHA-256 do CSV processado como entrada: `895dc3dad2840ac9e05c12d6442bd739d879c2d405e9b065efc0f1973be46a84`.
 
-Por isso, aprendi que as métricas que realmente importam aqui são:
-* **Recall (Sensibilidade):** De todas as fraudes reais, quantas o modelo conseguiu pegar? (Para um banco, deixar uma fraude escapar custa muito caro).
-* **Precisão:** Das transações que o modelo apontou como fraude, quantas realmente eram? (Evita bloquear compras de clientes honestos à toa).
-* **F1-Score e PR-AUC:** Ajudam a avaliar o equilíbrio entre pegar fraudes e não disparar alarmes falsos desnecessários.
+## Da v1 à v2: correção metodológica
 
----
+Na [v1](https://github.com/JVZerinho/Deteccao_Anomalias_Transacoes_Python/blob/dd6d69c45b5af4c6c8615d1eba8e29251cf7bad3/desafio.py), o escalonamento era ajustado na base completa e o conjunto de teste era usado para escolher o limiar. Esses procedimentos foram corrigidos na v2:
 
-## 2. Preparando os Dados
+1. Verificações de esquema, tipos, valores ausentes, infinitos, duplicatas, conflitos de rótulo e consistência temporal.
+2. Deduplicação determinística antes da divisão, evitando cópias idênticas em conjuntos diferentes.
+3. Divisão estratificada **60/20/20** antes do ajuste das transformações: treino com 170.235 linhas, validação com 56.745 e teste com 56.746.
+4. `Pipeline` + `ColumnTransformer`: `RobustScaler.fit` somente no treino; validação e teste recebem apenas transformações. O código verifica o centro do scaler contra a mediana do treino.
+5. Regressão logística, Random Forest e XGBoost treinados somente no treino. Modelos e limiares comparados exclusivamente na validação.
+6. Escolha congelada; somente o modelo selecionado produz probabilidades para a avaliação final do teste. Não há retreino com a validação após a escolha.
+7. SHAP calculado em uma amostra da validação; limites das faixas de score definidos no treino.
 
-Seguindo as orientações da aula, apliquei os seguintes tratamentos:
-1. **Escalonamento Robusto (`RobustScaler`):** As colunas `Time` (tempo) e `Amount` (valor da compra) tinham valores muito dispersos e com muitos outliers (compras de centavos até milhares de reais). Usei o `RobustScaler` porque ele utiliza a mediana e o IQR, não sendo distorcido por valores gigantes.
-2. **Transformação Logarítmica (`log_amount`):** Apliquei `np.log1p(Amount)` para suavizar a cauda longa dos valores.
-3. **Divisão Estratificada (`stratify=y`):** Na hora de separar treino (80%) e teste (20%), usei `stratify=y` para garantir que a proporção exata de 0,17% de fraudes ficasse igual nos dois grupos.
+Os números da v1 foram substituídos pelos artefatos da execução v2. As versões não constituem uma comparação causal de desempenho: protocolo, divisão e base após deduplicação mudaram.
 
----
+## Comparação na validação
 
-## 3. Testando e Comparando os Modelos
+Cada modelo usa seu limiar escolhido na validação. Critério: menor custo simulado total; desempate por menos alertas, maior AP e nome do modelo. Dentro de cada modelo, empates de custo favorecem menos alertas e maior limiar.
 
-Testei três algoritmos usando técnicas de peso nas classes (`class_weight='balanced'` e `scale_pos_weight`) para obrigar os modelos a prestarem atenção nas fraudes:
+| Modelo | Limiar | Recall | Precisão | AP | Custo hipotético total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Random Forest | 0,204564 | 89,36% | 49,12% | 0,8571 | 5.855,00 |
+| XGBoost | 0,561674 | 89,36% | 40,19% | 0,7908 | 6.045,00 |
+| Regressão logística | 0,981674 | 88,30% | 52,87% | 0,7872 | 6.285,00 |
 
-| Modelo | Recall (Fraude) | Precisão (Fraude) | F1-Score | PR-AUC | ROC-AUC |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Regressão Logística (Baseline)** | 91,84% | 5,69% | 0,1072 | 0,7245 | 0,9760 |
-| **Random Forest** | 78,57% | 88,51% | 0,8324 | 0,8596 | 0,9488 |
-| **XGBoost (Melhor resultado)** | **82,65%** | **88,04%** | **0,8526** | **0,8648** | **0,9807** |
+**Modelo selecionado: Random Forest**, limiar `0.204563648219`. A escolha vale para este cenário, não significa superioridade universal.
 
-* **O que notei:** A Regressão Logística pegou bastante fraude (91,84%), mas com precisão de só 5,69% (deu centenas de alarmes falsos, o que sobrecarregaria qualquer equipe). O **XGBoost** foi o mais equilibrado, pegando mais de 82% das fraudes com 88% de precisão e o melhor PR-AUC.
+Hipóteses de referência: revisão por alerta = **5,00 u.m.**; fraude não detectada = **500,00 u.m.**. Fórmula: `revisão × (TP + FP) + fraude não detectada × FN`. Todo alerta demanda revisão. Esses valores não são custos de um banco nem economia financeira comprovada.
 
----
+## Resultado no teste reservado
 
-## 4. Ajustando o Limiar de Decisão (Threshold Tuning)
+| Indicador | Resultado |
+| --- | ---: |
+| Transações | 56.746 |
+| Fraudes reais | 95 |
+| Verdadeiros positivos (TP) | 78 |
+| Falsos positivos (FP) | 90 |
+| Falsos negativos (FN) | 17 |
+| Verdadeiros negativos (TN) | 56.561 |
+| Recall | 82,11% |
+| Precisão | 46,43% |
+| F1 | 0,5932 |
+| Average precision (AP) | 0,7926 |
+| PR-AUC trapezoidal | 0,7923 |
+| ROC-AUC | 0,9530 |
+| KS | 0,8507 |
+| Gini | 0,9060 |
+| Captura nas duas primeiras faixas | 92,63% |
+| População nas duas primeiras faixas | 20,28% |
 
-Por padrão, os modelos consideram fraude qualquer transação com probabilidade acima de 0.50. Mas como em fraude é melhor investigar uma suspeita a mais do que deixar um golpe passar, fiz testes variando esse limiar no XGBoost:
+O modelo detectou **78 das 95 fraudes**, com **90 falsos positivos** e **17 fraudes não detectadas**. AP e PR-AUC trapezoidal são calculadas separadamente. O relatório contém todos os valores com precisão numérica original.
 
-| Limiar de Corte | Fraudes Pegas (TP) | Fraudes Perdidas (FN) | Alarmes Falsos (FP) | Recall | Precisão | F1-Score |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 0.10 | 87 | 11 | 24 | 88,78% | 78,38% | 0,8325 |
-| 0.20 | 86 | 12 | 14 | 87,76% | 86,00% | 0,8687 |
-| **0.30 (Escolhido)** | **85** | **13** | **11** | **86,73%** | **88,54%** | **0,8763** |
-| 0.50 (Padrão) | 81 | 17 | 11 | 82,65% | 88,04% | 0,8526 |
-| 0.70 | 78 | 20 | 8 | 79,59% | 90,70% | 0,8478 |
+![Curva Precision-Recall do modelo selecionado](outputs/pr_curve.png)
 
-**Minha escolha:** Baixei o limiar para **0.30**.
-* O Recall subiu de **82,65% para 86,73%** (conseguimos interceptar mais 4 fraudes no conjunto de teste).
-* A precisão continuou muito boa em **88,54%** (apenas 11 alarmes falsos em mais de 56 mil compras testadas).
-* Alcançou o maior **F1-Score (0,8763)** de todos os testes.
+## Score, decis e estabilidade
 
----
+O score educacional é `1000 × (1 − p_fraude)`: score maior significa menor risco previsto. Não é score Serasa, score de crédito calibrado ou probabilidade de inadimplência. Os modelos usam pesos de classe e suas probabilidades não foram calibradas.
 
-## 5. O que o SHAP me ensinou sobre as decisões do modelo
+As nove fronteiras de quantis vêm do **treino**. Decil de risco 1 reúne menores scores e maior risco. Empates são preservados; faixas podem ter tamanhos diferentes ou ficar vazias. As duas primeiras faixas capturam **92,63%** das fraudes e abrangem **20,28%** das transações do teste.
 
-Para não deixar o modelo como uma "caixa preta", usei a biblioteca **SHAP** (`TreeExplainer`) para entender quais variáveis mais pesavam na decisão:
+| Decil de risco | Intervalo de score* | Transações | Fraudes | Captura | Captura acumulada | População acumulada |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 0,000 a 980,371 | 5.741 | 86 | 90,53% | 90,53% | 10,12% |
+| 2 | 980,371 a 989,395 | 5.766 | 2 | 2,11% | 92,63% | 20,28% |
+| 3 | 989,395 a 993,521 | 5.735 | 3 | 3,16% | 95,79% | 30,38% |
+| 4 | 993,521 a 995,907 | 5.759 | 0 | 0,00% | 95,79% | 40,53% |
+| 5 | 995,907 a 997,293 | 5.680 | 0 | 0,00% | 95,79% | 50,54% |
+| 6 | 997,293 a 998,102 | 5.564 | 1 | 1,05% | 96,84% | 60,35% |
+| 7 | 998,102 a 998,625 | 5.499 | 0 | 0,00% | 96,84% | 70,04% |
+| 8 | 998,625 a 999,023 | 5.731 | 1 | 1,05% | 97,89% | 80,14% |
+| 9 | 999,023 a 999,354 | 5.609 | 1 | 1,05% | 98,95% | 90,02% |
+| 10 | 999,354 a 1.000,000 | 5.662 | 1 | 1,05% | 100,00% | 100,00% |
 
-1. **V14:** É a variável mais importante de todas. Quando o valor de V14 cai muito para números negativos, o modelo quase imediatamente sinaliza alto risco de fraude.
-2. **V4:** Valores positivos altos de V4 também são fortes indicativos de fraude.
-3. **V12 e V10:** Apresentam comportamento similar a V14, sendo essenciais para separar compras normais de golpes.
-4. **Tempo e Valor:** Ajudam a complementar o contexto (compras suspeitas fora do padrão habitual).
+*Intervalos arredondados nesta tabela. Limite inferior inclusivo e superior exclusivo; última faixa inclui 1000. Use os limites completos em [score_deciles.csv](outputs/score_deciles.csv).
 
----
+- **KS:** máximo absoluto da diferença entre TPR e FPR.
+- **Gini:** `2 × ROC_AUC − 1`.
+- **PSI validação → teste:** **0,000160**, usando limites do treino e pseudocontagem de 0,5 por faixa. É comparação entre amostras aleatórias, não evidência de drift temporal ou monitoramento em produção.
 
-## 6. O que fiz além do básico da aula
+![Distribuição do score educacional](outputs/score_distribution.png)
 
-* Apliquei o `RobustScaler` junto com o `log_amount` para não sofrer com a distorção dos valores de compras extravagantes.
-* Fiz o teste sistemático de limiar de probabilidade, explicando o impacto prático de cada valor.
-* Avaliei o modelo usando **PR-AUC**, que reflete muito melhor a realidade de datasets desbalanceados do que a ROC-AUC.
-* Utilizei o **SHAP** para enxergar de forma transparente o porquê de cada decisão do modelo.
+## Interpretação com SHAP
 
----
+O gráfico explica uma amostra de 300 observações da validação. Para o modelo selecionado, a unidade registrada é `fraud_probability`. SHAP mostra associações do modelo, não causalidade. V1–V28 são componentes PCA anônimos e não podem ser interpretados como renda, idade ou limite de crédito.
 
-## Como rodar o projeto
+![SHAP na validação](outputs/shap_summary.png)
 
-1. Instale as bibliotecas:
+## SQL analítico
+
+O [arquivo SQL completo](sql/queries_analiticas.sql) contém esquema e quatro análises; o [carregador](sql/carregar_e_consultar.py) importa previsões com comandos parametrizados:
+
+1. `GROUP BY` e `CASE WHEN`: taxa de fraude por faixa de valor e hora relativa, valor fraudulento observado e custos simulados.
+2. Funções de janela: média das últimas dez transações, `LAG` e alertas acumulados por conjunto.
+3. CTEs e JOINs: falsos positivos de alto valor na política original. Com limite hipotético de 1.000, a execução de referência retorna zero linhas; não há dados fictícios nos resultados.
+4. Coorte por dia relativo de transação. Não é safra de originação ou maturação de crédito.
+
+As quatro consultas foram executadas em SQLite e PostgreSQL 18.6 via PGlite, sobre 113.491 transações, com valores equivalentes e reconciliação independente em Pandas. A conexão psycopg a servidor PostgreSQL nativo não foi exercitada. A base não oferece ID de cliente/cartão; as janelas são globais por conjunto. `Time` não é horário civil e valor fraudulento não é perda realizada.
+
+## Dashboard
+
+**[Abrir o dashboard público](https://joaovictor-fraud-analytics.streamlit.app/)**
+
+O dashboard lê o relatório e as previsões desta execução. Os KPIs iniciais são do teste final e permanecem congelados. O simulador usa **somente validação**, com limiar e hipóteses de custo ajustáveis, sem treinar ou selecionar novos modelos. As previsões compactadas são conferidas contra o hash do CSV original antes de exibir números.
+
+![Dashboard com resultados da execução](assets/dashboard-preview.jpg)
+
+## Instalação e execução completas
+
+Use **Python 3.12**. Clone o repositório e entre na pasta:
+
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn xgboost shap
+git clone https://github.com/JVZerinho/Deteccao_Anomalias_Transacoes_Python.git
+cd Deteccao_Anomalias_Transacoes_Python
+```
+
+Windows PowerShell:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-dashboard.txt
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -m unittest -v test_metodologia
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe -m streamlit run dashboard/app_dashboard.py
+```
+
+Linux/macOS:
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt -r requirements-dashboard.txt
+.venv/bin/python -m pip check
+.venv/bin/python -m unittest -v test_metodologia
+.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python -m streamlit run dashboard/app_dashboard.py
+```
+
+Para abrir o dashboard e executar SQL, basta instalar `requirements-dashboard.txt`: os artefatos verificados acompanham o repositório. O modelo serializado e a base original não são necessários para a aplicação.
+
+Para gerar um **novo experimento**, preservando o resultado publicado, instale `requirements.txt` e use outro diretório de saída:
+
+```bash
+python desafio.py --openml-id 1597 --output-dir outputs-nova-execucao
+```
+
+Ou forneça CSV com exatamente `Time`, `V1`–`V28`, `Amount`, `Class`:
+
+```bash
+python desafio.py --data data/creditcard.csv --source-note "Origem e versão do CSV" --output-dir outputs-nova-execucao
+```
+
+Custos são parâmetros de validação: `--review-cost 5 --missed-fraud-cost 500`. Não escolha novos parâmetros em resposta ao desempenho do teste. O programa recusa saída não vazia para não misturar execuções. O download original não é redistribuído e o antigo Dropbox não é necessário.
+
+Para carregar e consultar SQLite:
+
+```bash
+python sql/carregar_e_consultar.py --engine sqlite
+```
+
+Para PostgreSQL, defina `DATABASE_URL` no ambiente local ou no serviço de segredos e use `--engine postgres`. Não coloque credenciais no código. Mais detalhes em [EXECUCAO_MODULO_3.md](EXECUCAO_MODULO_3.md).
+
+## Artefatos e rastreabilidade
+
+- [metrics_report.json](outputs/metrics_report.json): origem, hashes, ambiente, hipóteses, divisão, seleção e métricas.
+- [score_deciles.csv](outputs/score_deciles.csv): faixas e captura de validação/teste.
+- `outputs/predictions.csv.gz`: previsões de validação/teste, sem treinamento no início do dashboard; a leitura confere o hash do conteúdo descompactado.
+- [SQL, interface e reconciliação](VALIDACAO_MODULO_3.json); [verificação metodológica](VALIDACAO_MODULO_2.json).
+- Gerador desta documentação: `scripts/sincronizar_documentacao.py --dashboard-url URL_PUBLICADA`; os números são derivados do JSON/CSV, não digitados como estimativas.
+
+Não carregue pipelines `joblib` de terceiros. O dashboard utiliza apenas JSON, CSV/GZip e imagens geradas pelo projeto.
+
+## Limitações reais
+
+Divisão aleatória não mede generalização futura; não há isolamento por cliente/cartão verificável. A PCA foi fornecida pronta e não há acesso ao seu ajuste original. O teste contém apenas 95 fraudes, sem intervalo de confiança implementado. O score não foi calibrado, custos são hipóteses e não há impacto financeiro real ou implantação de modelo em produção demonstrados. Nenhuma métrica é automaticamente transferível para dados da Serasa Experian.
+

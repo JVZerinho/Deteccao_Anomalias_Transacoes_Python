@@ -1,6 +1,7 @@
 """Shared data contract for SQL and dashboard; never trains or tunes a model."""
 from dataclasses import dataclass
 import hashlib
+import gzip
 import json
 from pathlib import Path
 
@@ -19,9 +20,18 @@ class Bundle:
     output_dir: Path
 
 
-def digest(path: Path) -> str:
-    with path.open("rb") as stream:
+def digest(path: Path, decompress=False) -> str:
+    opener = gzip.open if decompress else open
+    with opener(path, "rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def artifact_paths(output_dir):
+    directory = Path(output_dir)
+    paths = {name: directory/name for name in REQUIRED_ARTIFACTS}
+    if not paths["predictions.csv"].is_file():
+        paths["predictions.csv"] = directory/"predictions.csv.gz"
+    return paths
 
 
 def load_bundle(output_dir: Path) -> Bundle:
@@ -29,12 +39,12 @@ def load_bundle(output_dir: Path) -> Bundle:
     report = json.loads((output_dir/"metrics_report.json").read_text(encoding="utf-8"))
     if report.get("status") != "completed" or report.get("schema_version") != "2.0":
         raise ValueError("Relatorio do Modulo 2 ausente, incompleto ou de versao incompativel.")
-    for name in REQUIRED_ARTIFACTS:
-        file = output_dir/name
+    paths = artifact_paths(output_dir)
+    for name, file in paths.items():
         expected = report["artifact_sha256"].get(name)
-        if not file.is_file() or not expected or digest(file) != expected:
+        if not file.is_file() or not expected or digest(file, decompress=file.suffix == ".gz") != expected:
             raise ValueError(f"Artefato ausente ou de outra execucao: {name}")
-    predictions = pd.read_csv(output_dir/"predictions.csv", float_precision="round_trip")
+    predictions = pd.read_csv(paths["predictions.csv"], float_precision="round_trip")
     deciles = pd.read_csv(output_dir/"score_deciles.csv", float_precision="round_trip")
     importance = pd.read_csv(output_dir/"shap_importance.csv", float_precision="round_trip")
     required = {"split", "source_row_id", "Time", "Amount", "Class", "fraud_probability", "score", "risk_decile", "alert"}
@@ -108,3 +118,4 @@ def scenario_curve(part, review_cost, missed_cost, frozen_threshold):
         raise ValueError("Curva de cenario requer validacao.")
     thresholds = np.unique(np.r_[np.linspace(0, 1, 201), frozen_threshold, np.nextafter(1.0, np.inf)])
     return pd.DataFrame([simulate_validation(part, t, review_cost, missed_cost) for t in thresholds])
+

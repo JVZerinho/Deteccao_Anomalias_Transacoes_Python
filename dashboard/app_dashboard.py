@@ -13,7 +13,7 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from analytics_data import REQUIRED_ARTIFACTS, load_bundle, scenario_curve, simulate_validation
+from analytics_data import artifact_paths, load_bundle, scenario_curve, simulate_validation
 
 st.set_page_config(page_title="Fraude, sob análise — João Victor", page_icon=":material/query_stats:", layout="wide")
 st.caption("JOÃO VICTOR PEREIRA SANTOS / CADERNO DE ANÁLISE")
@@ -36,7 +36,7 @@ def br_number(value, digits=0):
 
 directory = Path(os.environ.get("FRAUD_OUTPUT_DIR", str(ROOT/"outputs"))).resolve()
 try:
-    files = [directory/"metrics_report.json", *[directory/name for name in REQUIRED_ARTIFACTS]]
+    files = [directory/"metrics_report.json", *artifact_paths(directory).values()]
     signature = tuple((p.name, p.stat().st_mtime_ns, p.stat().st_size) for p in files)
     bundle = read_artifacts(str(directory), signature)
 except Exception as exc:
@@ -142,3 +142,4 @@ with st.expander("Protocolo, dados e arquivos de origem"):
     st.download_button("Baixar relatório original", (bundle.output_dir/"metrics_report.json").read_bytes(),
                        file_name="metrics_report.json", mime="application/json")
 st.caption("Projeto educacional de João Victor Pereira Santos. Não contém dados da Serasa Experian e não representa seus modelos ou políticas.")
+

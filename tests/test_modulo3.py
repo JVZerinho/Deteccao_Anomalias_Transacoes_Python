@@ -5,6 +5,8 @@ import sqlite3
 import sys
 import tempfile
 import unittest
+import shutil
+import gzip
 
 import numpy as np
 import pandas as pd
@@ -76,6 +78,21 @@ class SqlTests(unittest.TestCase):
 
 
 class ScenarioTests(unittest.TestCase):
+    def test_compressed_predictions_preserve_original_hash_and_results(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            for name in ['metrics_report.json','score_deciles.csv','shap_importance.csv','shap_summary.png']:
+                shutil.copy2(ROOT/'outputs'/name, target/name)
+            raw = (ROOT/'outputs/predictions.csv').read_bytes()
+            (target/'predictions.csv.gz').write_bytes(gzip.compress(raw, mtime=0))
+            bundle = load_bundle(target)
+            self.assertEqual(bundle.report['test']['tp'], 78)
+            self.assertEqual(len(bundle.predictions), 113491)
+            # A valid gzip with altered CSV must fail the original report's hash.
+            (target/'predictions.csv.gz').write_bytes(gzip.compress(raw.replace(b'validation', b'validatioX',1),mtime=0))
+            with self.assertRaisesRegex(ValueError,'Artefato'):
+                load_bundle(target)
+
     def test_simulation_matches_frozen_report_on_real_validation(self):
         bundle = load_bundle(ROOT/"outputs")
         report = bundle.report
@@ -128,3 +145,4 @@ class DashboardTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

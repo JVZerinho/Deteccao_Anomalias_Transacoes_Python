@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "methodology_unit_tests": 8,
+  "artifact_hashes_verified": 11,
+  "independent_confusion_matrix": {
+    "tp": 78,
+    "fp": 90,
+    "fn": 17,
+    "tn": 56561
+  },
+  "decile_totals_verified": true,
+  "cost_selection_verified": true,
+  "score_formula_verified": true,
+  "psi_reconciled": true,
+  "visual_inspection": "Three PNG plots inspected; readable labels and legends.",
+  "test_retraining_or_additional_model_predictions": false
+}

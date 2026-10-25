@@ -1,0 +1,10 @@
+numpy==2.2.6
+pandas==2.2.3
+scipy==1.15.3
+scikit-learn==1.6.1
+matplotlib==3.10.3
+xgboost==3.0.2
+shap==0.48.0
+joblib==1.5.1
+numba==0.61.2
+llvmlite==0.44.0

@@ -1,0 +1,381 @@
+split,relative_hour,amount_band,transactions,frauds,fraud_rate,fraud_amount_observed,simulated_missed_fraud_loss,simulated_review_cost
+test,0,01: abaixo de 10,374,1,0.00267379679144385,0.0,0,10.0
+test,0,02: de 10 a menos de 100,288,0,0.0,0,0,0
+test,0,03: de 100 a menos de 1000,127,0,0.0,0,0,0
+test,0,04: 1000 ou mais,3,0,0.0,0,0,0
+test,1,01: abaixo de 10,129,0,0.0,0,0,5.0
+test,1,02: de 10 a menos de 100,240,0,0.0,0,0,0
+test,1,03: de 100 a menos de 1000,83,1,0.012048192771084338,239.93,0,5.0
+test,1,04: 1000 ou mais,3,0,0.0,0,0,0
+test,2,01: abaixo de 10,136,3,0.022058823529411766,3.0,0,20.0
+test,2,02: de 10 a menos de 100,160,0,0.0,0,0,0
+test,2,03: de 100 a menos de 1000,36,0,0.0,0,0,0
+test,2,04: 1000 ou mais,4,1,0.25,1809.68,0,5.0
+test,3,01: abaixo de 10,104,2,0.019230769230769232,2.0,0,15.0
+test,3,02: de 10 a menos de 100,229,1,0.004366812227074236,30.39,0,5.0
+test,3,03: de 100 a menos de 1000,39,0,0.0,0,0,0
+test,4,01: abaixo de 10,60,1,0.016666666666666666,3.79,0,5.0
+test,4,02: de 10 a menos de 100,134,0,0.0,0,0,5.0
+test,4,03: de 100 a menos de 1000,40,0,0.0,0,0,0
+test,4,04: 1000 ou mais,1,0,0.0,0,0,0
+test,5,01: abaixo de 10,100,0,0.0,0,0,0
+test,5,02: de 10 a menos de 100,218,0,0.0,0,0,5.0
+test,5,03: de 100 a menos de 1000,30,0,0.0,0,0,0
+test,5,04: 1000 ou mais,1,0,0.0,0,0,0
+test,6,01: abaixo de 10,122,0,0.0,0,0,25.0
+test,6,02: de 10 a menos de 100,197,0,0.0,0,0,15.0
+test,6,03: de 100 a menos de 1000,46,0,0.0,0,0,0
+test,6,04: 1000 ou mais,2,0,0.0,0,0,0
+test,7,01: abaixo de 10,270,1,0.003703703703703704,3.76,0,10.0
+test,7,02: de 10 a menos de 100,313,2,0.006389776357827476,199.98,0,10.0
+test,7,03: de 100 a menos de 1000,105,0,0.0,0,0,0
+test,7,04: 1000 ou mais,8,0,0.0,0,0,0
+test,8,01: abaixo de 10,316,2,0.006329113924050633,1.36,0,15.0
+test,8,02: de 10 a menos de 100,510,0,0.0,0,0,5.0
+test,8,03: de 100 a menos de 1000,198,0,0.0,0,0,0
+test,8,04: 1000 ou mais,13,0,0.0,0,0,0
+test,9,01: abaixo de 10,444,0,0.0,0,0,5.0
+test,9,02: de 10 a menos de 100,756,0,0.0,0,0,0
+test,9,03: de 100 a menos de 1000,340,1,0.0029411764705882353,717.15,0,5.0
+test,9,04: 1000 ou mais,19,0,0.0,0,0,0
+test,10,01: abaixo de 10,430,0,0.0,0,0,10.0
+test,10,02: de 10 a menos de 100,733,1,0.001364256480218281,12.31,0,5.0
+test,10,03: de 100 a menos de 1000,390,0,0.0,0,0,0
+test,10,04: 1000 ou mais,21,0,0.0,0,0,0
+test,11,01: abaixo de 10,414,2,0.004830917874396135,2.0,0,15.0
+test,11,02: de 10 a menos de 100,844,2,0.002369668246445498,113.63,0,10.0
+test,11,03: de 100 a menos de 1000,403,4,0.009925558312655087,1306.1599999999999,0,20.0
+test,11,04: 1000 ou mais,28,0,0.0,0,0,0
+test,12,01: abaixo de 10,441,1,0.0022675736961451248,1.0,0,20.0
+test,12,02: de 10 a menos de 100,705,0,0.0,0,0,0
+test,12,03: de 100 a menos de 1000,380,1,0.002631578947368421,105.99,500.0,0
+test,12,04: 1000 ou mais,22,0,0.0,0,0,0
+test,13,01: abaixo de 10,480,2,0.004166666666666667,1.76,1000.0,10.0
+test,13,02: de 10 a menos de 100,707,0,0.0,0,0,0
+test,13,03: de 100 a menos de 1000,308,0,0.0,0,0,5.0
+test,13,04: 1000 ou mais,22,0,0.0,0,0,0
+test,14,01: abaixo de 10,485,2,0.004123711340206186,1.94,1000.0,0
+test,14,02: de 10 a menos de 100,772,3,0.0038860103626943004,299.96999999999997,0,15.0
+test,14,03: de 100 a menos de 1000,344,1,0.0029069767441860465,519.9,500.0,0
+test,14,04: 1000 ou mais,30,0,0.0,0,0,0
+test,15,01: abaixo de 10,483,1,0.002070393374741201,1.79,500.0,0
+test,15,02: de 10 a menos de 100,706,0,0.0,0,0,0
+test,15,03: de 100 a menos de 1000,344,0,0.0,0,0,0
+test,15,04: 1000 ou mais,21,0,0.0,0,0,0
+test,16,01: abaixo de 10,506,2,0.003952569169960474,12.18,0,10.0
+test,16,02: de 10 a menos de 100,713,0,0.0,0,0,0
+test,16,03: de 100 a menos de 1000,347,1,0.002881844380403458,270.0,0,5.0
+test,16,04: 1000 ou mais,25,0,0.0,0,0,0
+test,17,01: abaixo de 10,528,1,0.001893939393939394,0.0,0,5.0
+test,17,02: de 10 a menos de 100,673,1,0.0014858841010401188,19.04,0,5.0
+test,17,03: de 100 a menos de 1000,352,1,0.002840909090909091,720.38,0,5.0
+test,17,04: 1000 ou mais,32,0,0.0,0,0,0
+test,18,01: abaixo de 10,682,0,0.0,0,0,10.0
+test,18,02: de 10 a menos de 100,740,0,0.0,0,0,0
+test,18,03: de 100 a menos de 1000,286,2,0.006993006993006993,869.06,1000.0,0
+test,18,04: 1000 ou mais,16,1,0.0625,1354.25,0,5.0
+test,19,01: abaixo de 10,564,2,0.0035460992907801418,4.55,500.0,5.0
+test,19,02: de 10 a menos de 100,747,0,0.0,0,0,0
+test,19,03: de 100 a menos de 1000,272,1,0.003676470588235294,318.11,0,5.0
+test,19,04: 1000 ou mais,13,0,0.0,0,0,0
+test,20,01: abaixo de 10,671,0,0.0,0,0,10.0
+test,20,02: de 10 a menos de 100,795,1,0.0012578616352201257,76.94,0,5.0
+test,20,03: de 100 a menos de 1000,321,1,0.003115264797507788,124.53,0,5.0
+test,20,04: 1000 ou mais,15,0,0.0,0,0,0
+test,21,01: abaixo de 10,748,0,0.0,0,0,5.0
+test,21,02: de 10 a menos de 100,898,2,0.0022271714922048997,159.9,0,10.0
+test,21,03: de 100 a menos de 1000,319,2,0.006269592476489028,326.70000000000005,0,15.0
+test,21,04: 1000 ou mais,15,0,0.0,0,0,0
+test,22,01: abaixo de 10,781,1,0.0012804097311139564,0.2,500.0,0
+test,22,02: de 10 a menos de 100,723,0,0.0,0,0,0
+test,22,03: de 100 a menos de 1000,289,0,0.0,0,0,0
+test,22,04: 1000 ou mais,16,0,0.0,0,0,0
+test,23,01: abaixo de 10,534,1,0.0018726591760299626,2.0,0,10.0
+test,23,02: de 10 a menos de 100,464,0,0.0,0,0,0
+test,23,03: de 100 a menos de 1000,191,0,0.0,0,0,0
+test,23,04: 1000 ou mais,10,0,0.0,0,0,0
+test,24,01: abaixo de 10,368,0,0.0,0,0,5.0
+test,24,02: de 10 a menos de 100,300,0,0.0,0,0,0
+test,24,03: de 100 a menos de 1000,97,1,0.010309278350515464,451.27,500.0,0
+test,24,04: 1000 ou mais,4,0,0.0,0,0,0
+test,25,01: abaixo de 10,164,0,0.0,0,0,5.0
+test,25,02: de 10 a menos de 100,189,1,0.005291005291005291,18.0,0,15.0
+test,25,03: de 100 a menos de 1000,60,2,0.03333333333333333,861.95,0,10.0
+test,25,04: 1000 ou mais,2,0,0.0,0,0,0
+test,26,01: abaixo de 10,122,3,0.02459016393442623,2.01,0,30.0
+test,26,02: de 10 a menos de 100,167,5,0.029940119760479042,237.76,0,25.0
+test,26,03: de 100 a menos de 1000,42,0,0.0,0,0,0
+test,26,04: 1000 ou mais,3,0,0.0,0,0,0
+test,27,01: abaixo de 10,100,1,0.01,1.0,0,5.0
+test,27,02: de 10 a menos de 100,226,0,0.0,0,0,0
+test,27,03: de 100 a menos de 1000,35,0,0.0,0,0,0
+test,27,04: 1000 ou mais,1,0,0.0,0,0,0
+test,28,01: abaixo de 10,60,4,0.06666666666666667,2.92,500.0,15.0
+test,28,02: de 10 a menos de 100,134,0,0.0,0,0,0
+test,28,03: de 100 a menos de 1000,23,0,0.0,0,0,0
+test,28,04: 1000 ou mais,2,0,0.0,0,0,0
+test,29,01: abaixo de 10,102,0,0.0,0,0,0
+test,29,02: de 10 a menos de 100,121,0,0.0,0,0,0
+test,29,03: de 100 a menos de 1000,31,0,0.0,0,0,0
+test,30,01: abaixo de 10,228,2,0.008771929824561403,0.76,0,10.0
+test,30,02: de 10 a menos de 100,210,0,0.0,0,0,0
+test,30,03: de 100 a menos de 1000,50,0,0.0,0,0,0
+test,31,01: abaixo de 10,395,0,0.0,0,0,5.0
+test,31,02: de 10 a menos de 100,305,0,0.0,0,0,0
+test,31,03: de 100 a menos de 1000,93,0,0.0,0,0,0
+test,31,04: 1000 ou mais,7,0,0.0,0,0,0
+test,32,01: abaixo de 10,320,0,0.0,0,0,0
+test,32,02: de 10 a menos de 100,477,1,0.0020964360587002098,65.0,0,10.0
+test,32,03: de 100 a menos de 1000,166,0,0.0,0,0,5.0
+test,32,04: 1000 ou mais,12,0,0.0,0,0,0
+test,33,01: abaixo de 10,425,0,0.0,0,0,0
+test,33,02: de 10 a menos de 100,735,0,0.0,0,0,15.0
+test,33,03: de 100 a menos de 1000,355,0,0.0,0,0,5.0
+test,33,04: 1000 ou mais,27,0,0.0,0,0,0
+test,34,01: abaixo de 10,469,0,0.0,0,0,5.0
+test,34,02: de 10 a menos de 100,827,1,0.0012091898428053204,45.51,0,5.0
+test,34,03: de 100 a menos de 1000,361,0,0.0,0,0,5.0
+test,34,04: 1000 ou mais,26,0,0.0,0,0,0
+test,35,01: abaixo de 10,478,0,0.0,0,0,0
+test,35,02: de 10 a menos de 100,766,0,0.0,0,0,0
+test,35,03: de 100 a menos de 1000,384,0,0.0,0,0,5.0
+test,35,04: 1000 ou mais,25,0,0.0,0,0,0
+test,36,01: abaixo de 10,425,1,0.002352941176470588,2.0,0,5.0
+test,36,02: de 10 a menos de 100,704,0,0.0,0,0,0
+test,36,03: de 100 a menos de 1000,339,1,0.0029498525073746312,723.21,500.0,10.0
+test,36,04: 1000 ou mais,24,0,0.0,0,0,0
+test,37,01: abaixo de 10,473,1,0.0021141649048625794,0.0,0,20.0
+test,37,02: de 10 a menos de 100,737,0,0.0,0,0,0
+test,37,03: de 100 a menos de 1000,339,0,0.0,0,0,10.0
+test,37,04: 1000 ou mais,13,0,0.0,0,0,0
+test,38,01: abaixo de 10,566,0,0.0,0,0,15.0
+test,38,02: de 10 a menos de 100,767,0,0.0,0,0,5.0
+test,38,03: de 100 a menos de 1000,343,3,0.008746355685131196,1571.66,0,15.0
+test,38,04: 1000 ou mais,20,0,0.0,0,0,0
+test,39,01: abaixo de 10,540,2,0.003703703703703704,2.0,0,15.0
+test,39,02: de 10 a menos de 100,794,0,0.0,0,0,5.0
+test,39,03: de 100 a menos de 1000,386,0,0.0,0,0,5.0
+test,39,04: 1000 ou mais,23,0,0.0,0,0,0
+test,40,01: abaixo de 10,563,4,0.007104795737122558,12.17,500.0,15.0
+test,40,02: de 10 a menos de 100,778,0,0.0,0,0,10.0
+test,40,03: de 100 a menos de 1000,370,0,0.0,0,0,5.0
+test,40,04: 1000 ou mais,21,0,0.0,0,0,0
+test,41,01: abaixo de 10,534,1,0.0018726591760299626,1.0,0,10.0
+test,41,02: de 10 a menos de 100,740,0,0.0,0,0,0
+test,41,03: de 100 a menos de 1000,341,0,0.0,0,0,5.0
+test,41,04: 1000 ou mais,18,0,0.0,0,0,0
+test,42,01: abaixo de 10,634,1,0.0015772870662460567,0.0,0,10.0
+test,42,02: de 10 a menos de 100,755,1,0.0013245033112582781,35.0,0,10.0
+test,42,03: de 100 a menos de 1000,272,0,0.0,0,0,5.0
+test,42,04: 1000 ou mais,13,1,0.07692307692307693,1096.99,500.0,0
+test,43,01: abaixo de 10,561,1,0.0017825311942959,0.77,0,15.0
+test,43,02: de 10 a menos de 100,651,0,0.0,0,0,5.0
+test,43,03: de 100 a menos de 1000,231,0,0.0,0,0,10.0
+test,43,04: 1000 ou mais,12,0,0.0,0,0,0
+test,44,01: abaixo de 10,579,0,0.0,0,0,5.0
+test,44,02: de 10 a menos de 100,637,0,0.0,0,0,0
+test,44,03: de 100 a menos de 1000,266,0,0.0,0,0,5.0
+test,44,04: 1000 ou mais,11,0,0.0,0,0,0
+test,45,01: abaixo de 10,664,0,0.0,0,0,10.0
+test,45,02: de 10 a menos de 100,651,0,0.0,0,0,20.0
+test,45,03: de 100 a menos de 1000,232,0,0.0,0,0,5.0
+test,45,04: 1000 ou mais,12,0,0.0,0,0,0
+test,46,01: abaixo de 10,537,1,0.00186219739292365,0.0,500.0,5.0
+test,46,02: de 10 a menos de 100,500,0,0.0,0,0,0
+test,46,03: de 100 a menos de 1000,188,0,0.0,0,0,10.0
+test,46,04: 1000 ou mais,12,0,0.0,0,0,0
+test,47,01: abaixo de 10,414,0,0.0,0,0,0
+test,47,02: de 10 a menos de 100,413,0,0.0,0,0,0
+test,47,03: de 100 a menos de 1000,145,0,0.0,0,0,0
+test,47,04: 1000 ou mais,7,0,0.0,0,0,0
+validation,0,01: abaixo de 10,364,0,0.0,0,0,0
+validation,0,02: de 10 a menos de 100,311,0,0.0,0,0,0
+validation,0,03: de 100 a menos de 1000,119,0,0.0,0,0,0
+validation,0,04: 1000 ou mais,5,0,0.0,0,0,0
+validation,1,01: abaixo de 10,135,0,0.0,0,0,10.0
+validation,1,02: de 10 a menos de 100,238,0,0.0,0,0,0
+validation,1,03: de 100 a menos de 1000,62,0,0.0,0,0,0
+validation,1,04: 1000 ou mais,3,0,0.0,0,0,0
+validation,2,01: abaixo de 10,109,6,0.05504587155963303,6.1,0,40.0
+validation,2,02: de 10 a menos de 100,127,0,0.0,0,0,0
+validation,2,03: de 100 a menos de 1000,56,0,0.0,0,0,0
+validation,2,04: 1000 ou mais,2,0,0.0,0,0,0
+validation,3,01: abaixo de 10,92,4,0.043478260869565216,3.0,0,25.0
+validation,3,02: de 10 a menos de 100,226,0,0.0,0,0,0
+validation,3,03: de 100 a menos de 1000,36,0,0.0,0,0,0
+validation,3,04: 1000 ou mais,2,0,0.0,0,0,0
+validation,4,01: abaixo de 10,68,0,0.0,0,0,0
+validation,4,02: de 10 a menos de 100,109,0,0.0,0,0,0
+validation,4,03: de 100 a menos de 1000,25,0,0.0,0,0,0
+validation,5,01: abaixo de 10,108,2,0.018518518518518517,2.0,0,25.0
+validation,5,02: de 10 a menos de 100,194,0,0.0,0,0,0
+validation,5,03: de 100 a menos de 1000,25,0,0.0,0,0,0
+validation,5,04: 1000 ou mais,3,1,0.3333333333333333,1218.89,0,5.0
+validation,6,01: abaixo de 10,96,0,0.0,0,0,10.0
+validation,6,02: de 10 a menos de 100,185,0,0.0,0,0,10.0
+validation,6,03: de 100 a menos de 1000,61,0,0.0,0,0,0
+validation,6,04: 1000 ou mais,2,0,0.0,0,0,0
+validation,7,01: abaixo de 10,229,0,0.0,0,0,10.0
+validation,7,02: de 10 a menos de 100,309,3,0.009708737864077669,299.96999999999997,0,15.0
+validation,7,03: de 100 a menos de 1000,130,0,0.0,0,0,0
+validation,7,04: 1000 ou mais,4,0,0.0,0,0,0
+validation,8,01: abaixo de 10,303,0,0.0,0,0,0
+validation,8,02: de 10 a menos de 100,532,1,0.0018796992481203006,30.3,0,10.0
+validation,8,03: de 100 a menos de 1000,218,0,0.0,0,0,0
+validation,8,04: 1000 ou mais,7,0,0.0,0,0,0
+validation,9,01: abaixo de 10,457,3,0.006564551422319475,5.56,0,25.0
+validation,9,02: de 10 a menos de 100,760,2,0.002631578947368421,79.62,0,10.0
+validation,9,03: de 100 a menos de 1000,327,0,0.0,0,0,0
+validation,9,04: 1000 ou mais,26,0,0.0,0,0,0
+validation,10,01: abaixo de 10,439,0,0.0,0,0,5.0
+validation,10,02: de 10 a menos de 100,789,0,0.0,0,0,0
+validation,10,03: de 100 a menos de 1000,390,1,0.002564102564102564,111.7,0,5.0
+validation,10,04: 1000 ou mais,21,0,0.0,0,0,0
+validation,11,01: abaixo de 10,489,5,0.010224948875255624,11.85,0,25.0
+validation,11,02: de 10 a menos de 100,789,2,0.0025348542458808617,79.61,0,20.0
+validation,11,03: de 100 a menos de 1000,370,0,0.0,0,0,0
+validation,11,04: 1000 ou mais,32,0,0.0,0,0,0
+validation,12,01: abaixo de 10,463,3,0.0064794816414686825,3.0,500.0,10.0
+validation,12,02: de 10 a menos de 100,650,0,0.0,0,0,0
+validation,12,03: de 100 a menos de 1000,366,0,0.0,0,0,0
+validation,12,04: 1000 ou mais,21,0,0.0,0,0,0
+validation,13,01: abaixo de 10,460,2,0.004347826086956522,1.76,500.0,10.0
+validation,13,02: de 10 a menos de 100,696,0,0.0,0,0,0
+validation,13,03: de 100 a menos de 1000,339,1,0.0029498525073746312,360.0,0,5.0
+validation,13,04: 1000 ou mais,23,0,0.0,0,0,0
+validation,14,01: abaixo de 10,458,1,0.002183406113537118,0.76,0,10.0
+validation,14,02: de 10 a menos de 100,764,1,0.0013089005235602095,99.99,0,5.0
+validation,14,03: de 100 a menos de 1000,371,1,0.0026954177897574125,112.45,0,5.0
+validation,14,04: 1000 ou mais,29,0,0.0,0,0,0
+validation,15,01: abaixo de 10,451,2,0.004434589800443459,8.52,0,10.0
+validation,15,02: de 10 a menos de 100,725,0,0.0,0,0,0
+validation,15,03: de 100 a menos de 1000,372,1,0.002688172043010753,311.91,500.0,0
+validation,15,04: 1000 ou mais,22,0,0.0,0,0,0
+validation,16,01: abaixo de 10,482,3,0.006224066390041493,7.84,500.0,20.0
+validation,16,02: de 10 a menos de 100,692,0,0.0,0,0,0
+validation,16,03: de 100 a menos de 1000,346,1,0.002890173410404624,113.92,0,5.0
+validation,16,04: 1000 ou mais,20,0,0.0,0,0,0
+validation,17,01: abaixo de 10,520,0,0.0,0,0,5.0
+validation,17,02: de 10 a menos de 100,673,0,0.0,0,0,0
+validation,17,03: de 100 a menos de 1000,367,2,0.005449591280653951,585.0799999999999,500.0,5.0
+validation,17,04: 1000 ou mais,21,0,0.0,0,0,0
+validation,18,01: abaixo de 10,659,1,0.0015174506828528073,1.0,0,25.0
+validation,18,02: de 10 a menos de 100,786,0,0.0,0,0,0
+validation,18,03: de 100 a menos de 1000,315,0,0.0,0,0,0
+validation,18,04: 1000 ou mais,12,0,0.0,0,0,0
+validation,19,01: abaixo de 10,581,0,0.0,0,0,0
+validation,19,02: de 10 a menos de 100,708,0,0.0,0,0,0
+validation,19,03: de 100 a menos de 1000,311,0,0.0,0,0,0
+validation,19,04: 1000 ou mais,13,0,0.0,0,0,0
+validation,20,01: abaixo de 10,686,0,0.0,0,0,0
+validation,20,02: de 10 a menos de 100,803,1,0.0012453300124533001,30.14,500.0,0
+validation,20,03: de 100 a menos de 1000,340,2,0.0058823529411764705,550.18,0,10.0
+validation,20,04: 1000 ou mais,14,0,0.0,0,0,0
+validation,21,01: abaixo de 10,757,1,0.001321003963011889,1.0,0,10.0
+validation,21,02: de 10 a menos de 100,872,1,0.0011467889908256881,99.85,0,5.0
+validation,21,03: de 100 a menos de 1000,352,1,0.002840909090909091,254.76,0,5.0
+validation,21,04: 1000 ou mais,18,0,0.0,0,0,0
+validation,22,01: abaixo de 10,724,0,0.0,0,0,0
+validation,22,02: de 10 a menos de 100,753,0,0.0,0,0,0
+validation,22,03: de 100 a menos de 1000,286,0,0.0,0,0,0
+validation,22,04: 1000 ou mais,10,0,0.0,0,0,0
+validation,23,01: abaixo de 10,530,0,0.0,0,0,0
+validation,23,02: de 10 a menos de 100,466,0,0.0,0,0,0
+validation,23,03: de 100 a menos de 1000,207,2,0.00966183574879227,664.75,500.0,5.0
+validation,23,04: 1000 ou mais,10,0,0.0,0,0,0
+validation,24,01: abaixo de 10,368,0,0.0,0,0,5.0
+validation,24,02: de 10 a menos de 100,280,0,0.0,0,0,5.0
+validation,24,03: de 100 a menos de 1000,101,0,0.0,0,0,5.0
+validation,24,04: 1000 ou mais,3,0,0.0,0,0,0
+validation,25,01: abaixo de 10,175,1,0.005714285714285714,1.0,0,15.0
+validation,25,02: de 10 a menos de 100,169,1,0.005917159763313609,38.76,0,5.0
+validation,25,03: de 100 a menos de 1000,51,0,0.0,0,0,0
+validation,25,04: 1000 ou mais,4,0,0.0,0,0,0
+validation,26,01: abaixo de 10,129,3,0.023255813953488372,3.63,0,15.0
+validation,26,02: de 10 a menos de 100,161,1,0.006211180124223602,33.76,500.0,0
+validation,26,03: de 100 a menos de 1000,39,0,0.0,0,0,0
+validation,26,04: 1000 ou mais,3,0,0.0,0,0,0
+validation,27,01: abaixo de 10,91,2,0.02197802197802198,12.1,0,20.0
+validation,27,02: de 10 a menos de 100,190,0,0.0,0,0,5.0
+validation,27,03: de 100 a menos de 1000,36,0,0.0,0,0,5.0
+validation,27,04: 1000 ou mais,3,0,0.0,0,0,0
+validation,28,01: abaixo de 10,47,1,0.02127659574468085,0.01,0,5.0
+validation,28,02: de 10 a menos de 100,144,0,0.0,0,0,0
+validation,28,03: de 100 a menos de 1000,30,0,0.0,0,0,0
+validation,28,04: 1000 ou mais,2,0,0.0,0,0,0
+validation,29,01: abaixo de 10,132,0,0.0,0,0,0
+validation,29,02: de 10 a menos de 100,103,0,0.0,0,0,0
+validation,29,03: de 100 a menos de 1000,34,0,0.0,0,0,0
+validation,29,04: 1000 ou mais,1,0,0.0,0,0,0
+validation,30,01: abaixo de 10,206,0,0.0,0,0,0
+validation,30,02: de 10 a menos de 100,161,0,0.0,0,0,0
+validation,30,03: de 100 a menos de 1000,43,0,0.0,0,0,0
+validation,30,04: 1000 ou mais,1,0,0.0,0,0,0
+validation,31,01: abaixo de 10,388,0,0.0,0,0,10.0
+validation,31,02: de 10 a menos de 100,269,0,0.0,0,0,5.0
+validation,31,03: de 100 a menos de 1000,97,0,0.0,0,0,0
+validation,31,04: 1000 ou mais,3,0,0.0,0,0,0
+validation,32,01: abaixo de 10,333,0,0.0,0,0,0
+validation,32,02: de 10 a menos de 100,480,0,0.0,0,0,10.0
+validation,32,03: de 100 a menos de 1000,186,1,0.005376344086021506,105.89,0,10.0
+validation,32,04: 1000 ou mais,8,0,0.0,0,0,0
+validation,33,01: abaixo de 10,403,0,0.0,0,0,0
+validation,33,02: de 10 a menos de 100,792,0,0.0,0,0,5.0
+validation,33,03: de 100 a menos de 1000,381,0,0.0,0,0,5.0
+validation,33,04: 1000 ou mais,14,0,0.0,0,0,0
+validation,34,01: abaixo de 10,464,2,0.004310344827586207,3.22,0,15.0
+validation,34,02: de 10 a menos de 100,858,0,0.0,0,0,0
+validation,34,03: de 100 a menos de 1000,396,0,0.0,0,0,5.0
+validation,34,04: 1000 ou mais,24,0,0.0,0,0,0
+validation,35,01: abaixo de 10,441,0,0.0,0,0,15.0
+validation,35,02: de 10 a menos de 100,795,0,0.0,0,0,0
+validation,35,03: de 100 a menos de 1000,378,1,0.0026455026455026454,175.9,0,10.0
+validation,35,04: 1000 ou mais,25,0,0.0,0,0,0
+validation,36,01: abaixo de 10,444,0,0.0,0,0,5.0
+validation,36,02: de 10 a menos de 100,711,0,0.0,0,0,10.0
+validation,36,03: de 100 a menos de 1000,319,0,0.0,0,0,0
+validation,36,04: 1000 ou mais,20,0,0.0,0,0,0
+validation,37,01: abaixo de 10,464,0,0.0,0,0,5.0
+validation,37,02: de 10 a menos de 100,707,0,0.0,0,0,0
+validation,37,03: de 100 a menos de 1000,326,1,0.003067484662576687,925.31,0,20.0
+validation,37,04: 1000 ou mais,17,0,0.0,0,0,0
+validation,38,01: abaixo de 10,520,0,0.0,0,0,5.0
+validation,38,02: de 10 a menos de 100,792,0,0.0,0,0,5.0
+validation,38,03: de 100 a menos de 1000,324,0,0.0,0,0,5.0
+validation,38,04: 1000 ou mais,25,0,0.0,0,0,0
+validation,39,01: abaixo de 10,519,1,0.0019267822736030828,1.0,0,10.0
+validation,39,02: de 10 a menos de 100,822,0,0.0,0,0,10.0
+validation,39,03: de 100 a menos de 1000,400,1,0.0025,195.66,0,5.0
+validation,39,04: 1000 ou mais,22,0,0.0,0,0,0
+validation,40,01: abaixo de 10,563,0,0.0,0,0,5.0
+validation,40,02: de 10 a menos de 100,859,1,0.0011641443538998836,94.82,0,10.0
+validation,40,03: de 100 a menos de 1000,325,2,0.006153846153846154,1663.82,0,20.0
+validation,40,04: 1000 ou mais,32,0,0.0,0,0,0
+validation,41,01: abaixo de 10,608,2,0.003289473684210526,1.86,0,15.0
+validation,41,02: de 10 a menos de 100,734,0,0.0,0,0,0
+validation,41,03: de 100 a menos de 1000,330,1,0.0030303030303030303,237.26,0,10.0
+validation,41,04: 1000 ou mais,22,0,0.0,0,0,0
+validation,42,01: abaixo de 10,608,4,0.006578947368421052,2.78,0,20.0
+validation,42,02: de 10 a menos de 100,734,0,0.0,0,0,0
+validation,42,03: de 100 a menos de 1000,286,0,0.0,0,0,5.0
+validation,42,04: 1000 ou mais,10,0,0.0,0,0,0
+validation,43,01: abaixo de 10,553,3,0.0054249547920434,5.4399999999999995,0,25.0
+validation,43,02: de 10 a menos de 100,622,0,0.0,0,0,10.0
+validation,43,03: de 100 a menos de 1000,244,0,0.0,0,0,0
+validation,43,04: 1000 ou mais,18,0,0.0,0,0,0
+validation,44,01: abaixo de 10,605,1,0.001652892561983471,0.77,0,5.0
+validation,44,02: de 10 a menos de 100,721,0,0.0,0,0,0
+validation,44,03: de 100 a menos de 1000,252,2,0.007936507936507936,423.14,0,15.0
+validation,44,04: 1000 ou mais,10,0,0.0,0,0,0
+validation,45,01: abaixo de 10,644,0,0.0,0,0,10.0
+validation,45,02: de 10 a menos de 100,639,1,0.001564945226917058,39.98,0,5.0
+validation,45,03: de 100 a menos de 1000,260,0,0.0,0,0,5.0
+validation,45,04: 1000 ou mais,13,0,0.0,0,0,0
+validation,46,01: abaixo de 10,540,0,0.0,0,0,10.0
+validation,46,02: de 10 a menos de 100,564,1,0.0017730496453900709,19.95,500.0,0
+validation,46,03: de 100 a menos de 1000,189,2,0.010582010582010581,1024.3,500.0,15.0
+validation,46,04: 1000 ou mais,8,0,0.0,0,0,0
+validation,47,01: abaixo de 10,390,1,0.002564102564102564,0.76,0,10.0
+validation,47,02: de 10 a menos de 100,405,0,0.0,0,0,0
+validation,47,03: de 100 a menos de 1000,145,0,0.0,0,0,5.0
+validation,47,04: 1000 ou mais,10,0,0.0,0,0,0

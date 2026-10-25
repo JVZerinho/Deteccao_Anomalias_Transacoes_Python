@@ -4,3 +4,7 @@ data/
 outputs/
 test_outputs/
 *.pyc
+node_modules/
+.streamlit/secrets.toml
+*.sqlite
+*.sqlite-journal

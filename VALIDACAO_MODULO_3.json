@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "loaded_transactions": 113491,
+  "queries": {
+    "q1_faixa_valor_hora": {
+      "rows": 380,
+      "sqlite_postgres_values_match": true
+    },
+    "q2_janelas": {
+      "rows": 113491,
+      "sqlite_postgres_values_match": true
+    },
+    "q3_falsos_positivos_alto_valor": {
+      "rows": 0,
+      "sqlite_postgres_values_match": true
+    },
+    "q4_coorte_temporal": {
+      "rows": 4,
+      "sqlite_postgres_values_match": true
+    }
+  },
+  "independent_pandas_reconciliation": true,
+  "methodology_and_ui_tests": 10,
+  "postgres_verification": {
+    "engine": "PostgreSQL via PGlite",
+    "version": "PostgreSQL 18.6 (PGlite 0.5.11) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit",
+    "rowCounts": {
+      "q1_faixa_valor_hora": 380,
+      "q2_janelas": 113491,
+      "q3_falsos_positivos_alto_valor": 0,
+      "q4_coorte_temporal": 4
+    }
+  },
+  "postgres_limit": "PostgreSQL WASM via PGlite; native PostgreSQL server/psycopg connection not exercised.",
+  "high_value_false_positive_cutoff": 1000,
+  "high_value_false_positive_count": 0,
+  "test_model_retraining": false
+}

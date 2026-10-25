@@ -1,0 +1,64 @@
+{
+  "engine": "sqlite",
+  "loaded_transactions": 113491,
+  "results": {
+    "q1_faixa_valor_hora": {
+      "rows": 380,
+      "columns": [
+        "split",
+        "relative_hour",
+        "amount_band",
+        "transactions",
+        "frauds",
+        "fraud_rate",
+        "fraud_amount_observed",
+        "simulated_missed_fraud_loss",
+        "simulated_review_cost"
+      ]
+    },
+    "q2_janelas": {
+      "rows": 113491,
+      "columns": [
+        "transaction_id",
+        "split",
+        "time_seconds",
+        "amount",
+        "is_fraud",
+        "alert",
+        "moving_average_10_transactions",
+        "seconds_since_previous_transaction",
+        "cumulative_alerts"
+      ]
+    },
+    "q3_falsos_positivos_alto_valor": {
+      "rows": 0,
+      "columns": [
+        "transaction_id",
+        "split",
+        "time_seconds",
+        "amount",
+        "fraud_probability",
+        "score",
+        "risk_decile",
+        "total_high_value_false_positives",
+        "high_value_flagged_amount"
+      ]
+    },
+    "q4_coorte_temporal": {
+      "rows": 4,
+      "columns": [
+        "split",
+        "relative_day",
+        "transactions",
+        "frauds",
+        "fraud_rate",
+        "fraud_amount_observed",
+        "cumulative_frauds"
+      ]
+    }
+  },
+  "parameters": {
+    "high_value_cutoff": 1000.0
+  },
+  "note": "Tempo relativo; valores fraudulentos observados nao sao perdas realizadas."
+}

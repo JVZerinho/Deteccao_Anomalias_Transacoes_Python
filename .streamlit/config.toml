@@ -1,0 +1,12 @@
+[theme]
+base = "light"
+primaryColor = "#A3452D"
+backgroundColor = "#EEE9DF"
+secondaryBackgroundColor = "#E4DFD4"
+textColor = "#282923"
+borderColor = "#C9C3B6"
+font = "'Bricolage Grotesque':https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&display=swap"
+chartCategoricalColors = ["#A3452D", "#344C47", "#827456", "#665B50"]
+
+[browser]
+gatherUsageStats = false
